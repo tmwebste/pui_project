@@ -10,4 +10,4 @@ class Options extends Component {
   }
 }
 
-export default new Options();
+export default Options;

@@ -3,14 +3,11 @@
     justify-content: center;
   }
   
-
-
   .main-notecard {
     width: 100%;
     height: auto;
     display: block;
   }
-  
 
   .mainGame h1 {
     position: absolute;

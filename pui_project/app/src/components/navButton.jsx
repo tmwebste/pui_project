@@ -10,4 +10,4 @@ class NavButton extends Component {
   }
 }
 
-export default new NavButton();
+export default NavButton;
