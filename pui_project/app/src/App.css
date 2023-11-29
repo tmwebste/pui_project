@@ -1,0 +1,120 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* styles.css */
+body {
+  margin: 0;
+  overflow: hidden; 
+}
+
+.intro {
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  width: 40%;
+  height: 90%;
+  padding: auto;
+  z-index: 0;
+}
+
+.main {
+  /* position: relative; */
+  display: flex;
+  width: 100%; /* Set width to 100% of the viewport width */
+  height: 100%; /* Set height to 100% of the viewport height */
+}
+
+.background-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  z-index: -2;
+}
+
+.main-notecard {
+  width: 50%;
+  height: 90%;
+  /* object-fit: cover; */
+  position: absolute;
+  top: 5%;
+  left: 25%;
+  z-index: -1;
+}
+
+.pin {
+  position: relative;
+  top: 1%;
+  left: 2%;
+  z-index: 2;
+}
+
+.sideBG {
+  position: absolute;
+  left: 2%;
+  top: 20px;
+  z-index: -1;
+}
+
+.side-mini-cards {
+  display: flex;
+  flex-direction: column;
+  height:600px;
+  margin-top: 130px;
+  justify-content: space-between;
+  position: absolute;
+  left: 2%;
+  top: 20px;
+  width: 20%;
+  z-index: 0;
+  
+}
+
+.character-details {
+  width: 100%;
+  justify-content: center;
+}
+
+.miniCardBG {
+  position: absolute;
+  z-index: 0;
+  box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.25);
+}
+
+.character-image {
+  height: 200px;
+}
+
+.minicard-content {
+  position: relative;
+  left: 0px;
+  top: 2px;
+  z-index: 1;
+}
+
+section.miniCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  rotate: 3deg;
+  width: 200px;
+  margin-left: 8%;
+  
+}
+
+.overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0; /* Set a higher value than -1 */
+}
+
+
+

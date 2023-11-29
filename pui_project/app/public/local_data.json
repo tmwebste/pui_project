@@ -1,0 +1,184 @@
+{
+    "game": {
+        "playing": false,
+        "story": {
+            "year": "1720",
+            "theme": "Pirate Mystery",
+            "synopsis": "In the treacherous waters of the Caribbean, a murder has taken place on a pirate ship. Six swashbuckling characters are drawn into a tale of deceit and treachery.",
+            "numberOfCharacters": 6,
+            "evidence": {
+                "_wittnessesComment": "Witnesses should be a subset of all the characters.",
+                "weapon": "Cutlass",
+                "witnesses": [
+                    "captain",
+                    "sailor"
+                ]
+            }
+        },
+        "characters": {
+            "_comments": "Fill this section with several characters (this should match the numberOfCharacters value) that fit the story theme. Only one person should be guilty.",
+            "captain": {
+                "guilty": false,
+                "attributes": {
+                    "sadness": 0.1,
+                    "happiness": 0.2,
+                    "anger": 0.4,
+                    "anxiety": 0.3,
+                    "fear": 0.5
+                },
+                "background": {
+                    "firstName": "Blackbeard",
+                    "lastName": "Smith",
+                    "age": 45,
+                    "occupation": "Pirate Captain",
+                    "backstory": "A notorious pirate captain with a reputation for ruthlessness.",
+                    "bias": null,
+                    "_connectionComments": "Create a list of connections to the other characters. They should not be connected to everyone.",
+                    "connections": [
+                        "sailor",
+                        "navigator"
+                    ]
+                },
+                "response": {
+                    "responseSentiment": null,
+                    "responseText": null
+                }
+            },
+            "sailor": {
+                "guilty": false,
+                "attributes": {
+                    "sadness": 0.2,
+                    "happiness": 0.3,
+                    "anger": 0.5,
+                    "anxiety": 0.4,
+                    "fear": 0.6
+                },
+                "background": {
+                    "firstName": "Jack",
+                    "lastName": "O'Connell",
+                    "age": 30,
+                    "occupation": "Ship's Sailor",
+                    "backstory": "A loyal sailor who has served under Blackbeard for years.",
+                    "bias": null,
+                    "_connectionComments": "Create a list of connections to the other characters. They should not be connected to everyone.",
+                    "connections": [
+                        "captain",
+                        "navigator"
+                    ]
+                },
+                "response": {
+                    "responseSentiment": null,
+                    "responseText": null
+                }
+            },
+            "navigator": {
+                "guilty": false,
+                "attributes": {
+                    "sadness": 0.3,
+                    "happiness": 0.4,
+                    "anger": 0.6,
+                    "anxiety": 0.5,
+                    "fear": 0.7
+                },
+                "background": {
+                    "firstName": "Anne",
+                    "lastName": "Bonny",
+                    "age": 28,
+                    "occupation": "Navigator",
+                    "backstory": "A skilled navigator known for her cunning and ambition.",
+                    "bias": null,
+                    "_connectionComments": "Create a list of connections to the other characters. They should not be connected to everyone.",
+                    "connections": [
+                        "captain",
+                        "sailor"
+                    ]
+                },
+                "response": {
+                    "responseSentiment": null,
+                    "responseText": null
+                }
+            },
+            "gunner": {
+                "guilty": false,
+                "attributes": {
+                    "sadness": 0.1,
+                    "happiness": 0.3,
+                    "anger": 0.7,
+                    "anxiety": 0.6,
+                    "fear": 0.4
+                },
+                "background": {
+                    "firstName": "Calico",
+                    "lastName": "Jack",
+                    "age": 35,
+                    "occupation": "Ship's Gunner",
+                    "backstory": "An expert marksman responsible for the ship's cannons.",
+                    "bias": null,
+                    "_connectionComments": "Create a list of connections to the other characters. They should not be connected to everyone.",
+                    "connections": [
+                        "sailor",
+                        "navigator"
+                    ]
+                },
+                "response": {
+                    "responseSentiment": null,
+                    "responseText": null
+                }
+            },
+            "cook": {
+                "guilty": false,
+                "attributes": {
+                    "sadness": 0.2,
+                    "happiness": 0.6,
+                    "anger": 0.4,
+                    "anxiety": 0.2,
+                    "fear": 0.3
+                },
+                "background": {
+                    "firstName": "Pegleg",
+                    "lastName": "Morgan",
+                    "age": 40,
+                    "occupation": "Ship's Cook",
+                    "backstory": "A jovial cook known for his culinary skills and storytelling.",
+                    "bias": null,
+                    "_connectionComments": "Create a list of connections to the other characters. They should not be connected to everyone.",
+                    "connections": [
+                        "captain",
+                        "gunner"
+                    ]
+                },
+                "response": {
+                    "responseSentiment": null,
+                    "responseText": null
+                }
+            },
+            "cabin_boy": {
+                "guilty": true,
+                "attributes": {
+                    "sadness": 0.4,
+                    "happiness": 0.2,
+                    "anger": 0.5,
+                    "anxiety": 0.6,
+                    "fear": 0.7
+                },
+                "background": {
+                    "firstName": "Billy",
+                    "lastName": "Turner",
+                    "age": 16,
+                    "occupation": "Cabin Boy",
+                    "backstory": "A young cabin boy with secrets that could sink the ship.",
+                    "bias": null,
+                    "_connectionComments": "Create a list of connections to the other characters. They should not be connected to everyone.",
+                    "connections": [
+                        "captain",
+                        "cook"
+                    ]
+                },
+                "response": {
+                    "responseSentiment": null,
+                    "responseText": null
+                }
+            }
+        }
+    }
+}
