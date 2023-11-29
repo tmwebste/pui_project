@@ -28,6 +28,11 @@ body {
   height: 100%; /* Set height to 100% of the viewport height */
 }
 
+.message-input {
+  position: absolute;
+  left: 80%;
+}
+
 .background-img {
   position: absolute;
   top: 0;

@@ -62,17 +62,19 @@ class MainGame extends Component {
 
 
             {/* Replace with MessageSection and render all previous messages */}
-            <input
-              type="text"
-              value={this.state.userMessage}
-              onChange={this.handleInputChange}
-            />
+            <section className='message-input'>
+              <input
+                type="text"
+                value={this.state.userMessage}
+                onChange={this.handleInputChange}
+              />
 
-            <button className='messageSend'
-              onClick={() => this.handleMessageSend()}
-              disabled={this.state.isLoading}>
-              Send Message
-            </button>
+              <button className='messageSend'
+                onClick={() => this.handleMessageSend()}
+                disabled={this.state.isLoading}>
+                Send Message
+              </button>
+            </section>
             {this.state.isLoading ? (
               <p>Loading...</p>
             ) : this.props.currentResponse != null  && this.props.messages[this.state.selectedCharacterIndex].length > 0 ? (
