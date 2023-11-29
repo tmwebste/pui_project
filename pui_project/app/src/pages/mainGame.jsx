@@ -68,7 +68,6 @@ class MainGame extends Component {
               onChange={this.handleInputChange}
             />
 
-            {/* Render character details of selected character */}
             <button className='messageSend'
               onClick={() => this.handleMessageSend()}
               disabled={this.state.isLoading}>
