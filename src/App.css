@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Just Another Hand');
+@import url('https://fonts.googleapis.com/css?family=Special Elite');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -9,6 +12,8 @@
 body {
   margin: 0;
   overflow: hidden; 
+  font-family: 'Special Elite';
+  color: black;
 }
 
 .intro {
@@ -30,7 +35,9 @@ body {
 
 .message-input {
   position: absolute;
-  left: 80%;
+  left: 78.3%;
+  top: 65%;
+  width: 225px;
 }
 
 .background-img {
@@ -65,6 +72,46 @@ body {
   left: 2%;
   top: 20px;
   z-index: -1;
+}
+
+.messagesBG {
+  position: absolute;
+  left: 78%;
+  top: 20px;
+  z-index: -1;
+}
+
+.messages {
+  position: absolute;
+  width: 218px;
+  height: 420px;
+  overflow-y: scroll;
+  left: 79%;
+  top: 255px;
+  z-index: 0;
+  justify-content: left;
+  text-align: left;
+}
+
+.messages-card {
+  position: absolute;
+  left: 78%;
+  top: 140px;
+  z-index: 0;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  margin-left: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(90, 90, 90);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .side-mini-cards {
@@ -103,14 +150,97 @@ body {
   z-index: 1;
 }
 
-section.miniCard {
+.toggle-case-view{
+  position: absolute;
+  left: 2%;
+  rotate: -3deg;
+  top: 800px;
+}
+
+.toggle-menu-view{
+  position: absolute;
+  left: 2%;
+  rotate: 2deg;
+  top: 900px;
+}
+
+.quit-button{
+  position: relative;
+}
+
+.accuse-button{
+  position: relative;
+}
+
+.white-card-button-label{
+  position: absolute;
+  left: 32%;
+  top: 12%;
+  color: black;
+}
+
+#case-button-label{
+  position: absolute;
+  left: 32%;
+  top: 12%;
+  color: black;
+}
+
+#menu-button-label{
+  position: absolute;
+  left: 32%;
+  top: 12%;
+  color: black;
+}
+
+#accuse-button-label{
+  position: absolute;
+  left: 45%;
+  top: 12%;
+  color: black;
+}
+
+.white-card-button {     
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;     
+  font-size: 24px;
+}
+
+.white-card-button:focus {
+  outline: 0 !important;
+}
+
+.brown-card-button {     
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;     
+  font-size: 24px;
+}
+
+.brown-card-button:focus {
+  outline: 0 !important;
+}
+
+.brown-card-button-label{
+  position: absolute;
+  left: 32%;
+  top: 35%;
+  color: black;
+}
+
+.miniCard {
   display: flex;
   align-items: center;
   justify-content: center;
   rotate: 3deg;
   width: 200px;
   margin-left: 8%;
-  
+  font-weight: bold;
 }
 
 .overlay-content {
@@ -121,5 +251,12 @@ section.miniCard {
   z-index: 0; /* Set a higher value than -1 */
 }
 
+.instructions {
+  text-align: left;
+}
 
-
+.synopsis {
+  text-align: left;
+  font-size: 22px;
+  
+}

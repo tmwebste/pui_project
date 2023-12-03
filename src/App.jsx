@@ -20,6 +20,7 @@ class App extends Component {
       characters: null,
       charactersArray: null,
       currentResponse: null,
+      judgeResponse: null,
       messages: [[],[],[],[]],
       playing: false,
     };
@@ -47,7 +48,7 @@ class App extends Component {
           charactersArray: charactersArray,
         });
       });
-      console.log(this.state.charactersArray);
+      console.log(this.state.storyJSON);
     } catch (error) {
       console.error("Error fetching story data:", error);
     }
@@ -59,6 +60,15 @@ class App extends Component {
     this.setState({ 
       currentResponse: null,
     });
+
+    const updatedMessages = this.state.messages;
+    let messageObject = { senderMessage: message};
+    updatedMessages[index].push(messageObject);
+    
+    this.setState({
+      messages: updatedMessages,
+    });
+
     console.log("Character Index: ", index);
     if (this.state.storySummary) {
       if (message.length > 0){
@@ -67,23 +77,60 @@ class App extends Component {
           let response = await ServerInterface.getCharacterResponse(
             this.state.charactersArray[index],
             message,
-            this.state.storySummary
+            this.state.storySummary,
+            'character_response'
           );
           
           const updatedMessages = this.state.messages;
-          const messageObject = { senderMessage: message, characterMessage: response};
+          messageObject = { senderMessage: message, characterMessage: response.response};
 
-          updatedMessages[index].push(messageObject);
+          updatedMessages[index][updatedMessages[index].length -1 ]=(messageObject);
          
           this.setState({
             messages: updatedMessages,
             currentResponse: response,
           });
           
-          console.log(this.state.messages);
+          console.log(this.state.messages[0].length);
 
         } catch (error) {
           console.error('Error getting character response:', error);
+        }
+      }
+      else {
+        console.log("user did not enter a message");
+      }
+    } else {
+      console.error('Error: storySummary is null');
+    }
+  };
+
+  getVerdict = async (messages, index) => {
+    // Check if storySummary is not null before accessing its properties
+    this.setState({ 
+      judgeResponse: null,
+    });
+
+    console.log("Character Index: ", index);
+    if (this.state.storySummary) {
+      if (messages.length > 0){
+        try {
+          // Assuming ServerInterface.getCharacterResponse returns a Promise
+          let response = await ServerInterface.getCharacterResponse(
+            this.state.charactersArray[index],
+            messages,
+            this.state.storySummary,
+            'get_verdict'
+          );
+         
+          this.setState({
+            judgeResponse: response,
+          });
+          
+          console.log(this.state.judgeResponse);
+
+        } catch (error) {
+          console.error('Error getting judge response:', error);
         }
       }
       else {
@@ -106,7 +153,9 @@ class App extends Component {
             story={this.state.storySummary}
             characters={this.state.charactersArray}
             getResponse={this.getResponse}
+            getVerdict={this.getVerdict}
             currentResponse={this.state.currentResponse}
+            judgeResponse={this.state.judgeResponse}
             bgImg={notecardimg}
             messages={this.state.messages}
           />

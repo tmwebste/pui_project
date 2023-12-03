@@ -7,7 +7,8 @@ class ServerInterface extends Component {
   constructor() {
     super();
     this.state = {
-      SERVER_IP:'https://mystery-server.fly.dev/'
+      SERVER_IP:'https://mystery-server.fly.dev/',
+      // SERVER_IP:'http://127.0.0.1:5000/'
     }
   }
 
@@ -17,7 +18,7 @@ class ServerInterface extends Component {
       if (!response.ok) {
         throw new Error(`Failed to fetch: ${response.statusText}`);
       }
-      console.log(response);
+      // console.log(response);
       const data = await response.json();
       return data;
     } catch (error) {
@@ -26,18 +27,18 @@ class ServerInterface extends Component {
     }
   }
 
-  getCharacterResponse = async (characterProfile, message, synopsys) => {
+  getCharacterResponse = async (characterProfile, message, synopsis, endpoint) => {
     // characterProfile = JSON.stringify(characterProfile);
     try {
       // Define the request data
       const requestData = {
         message,
         characterProfile, 
-        synopsys, 
+        synopsis, 
       };
       console.log(requestData);
       // Make a POST request to the Flask server
-      const response = await fetch( this.state.SERVER_IP + 'character_response', {
+      const response = await fetch( this.state.SERVER_IP + endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -61,6 +62,7 @@ class ServerInterface extends Component {
       console.error('Client-side error:', error);
     }
   }
+  
 
   render() {
   }
