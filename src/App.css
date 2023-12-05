@@ -21,9 +21,10 @@ body {
   top: 25%;
   left: 30%;
   width: 40%;
-  height: 90%;
+  height: 65%;
   padding: auto;
-  z-index: 0;
+  z-index: 2;
+  overflow-y: auto;
 }
 
 .main {
@@ -200,6 +201,13 @@ body {
   color: black;
 }
 
+#start-button-label{
+  position: absolute;
+  left: 40%;
+  top: 80%;
+  color: black;
+}
+
 .white-card-button {     
   background-color: Transparent;
   background-repeat:no-repeat;
@@ -257,6 +265,13 @@ body {
 
 .synopsis {
   text-align: left;
-  font-size: 22px;
-  
+  font-size: 22px; 
 }
+
+/* .intro::-webkit-scrollbar {
+  display: none;
+}
+
+.intro::-webkit-scrollbar:hover {
+  display: flex;
+} */

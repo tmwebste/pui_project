@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CardButton from '../components/cardButton';
 
 class IntroPage extends Component {
   constructor() {

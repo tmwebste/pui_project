@@ -18,7 +18,7 @@ class CardButton extends Component {
         ):(
           <button className={this.props.buttonStyle + '-card-button'} name='card-button' onClick={this.props.onclick}>
             <img className='button-img' src={brownBG} alt='button background'/>
-            <label className='brown-card-button-label'>{this.props.label}</label>
+            <label id={this.props.labelID} className='brown-card-button-label'>{this.props.label}</label>
           </button>
         )}
       </div>
