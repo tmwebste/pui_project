@@ -7,11 +7,12 @@ class SideBar extends Component {
     super();
   }
 
+  // Create MiniCard Components for each character in the game file
   renderMiniCards() {
     const charactersToRender = Object.values(this.props.characters).filter((character, index) => index !== null );
     return charactersToRender.map((character, index) => {
       if (character && character.background) {
-        const { firstName, lastName, occupation } = character.background; // Extracting necessary data
+        const { firstName, lastName, occupation } = character.background; // Extract necessary data
         return (
           <MiniCard
             key={index}
@@ -25,9 +26,9 @@ class SideBar extends Component {
           
         );
       } else {
-        // Handle missing or incomplete data for a character more explicitly if needed
+        // Handle missing or incomplete data for a character
         console.error(`Character at index ${index} data is incomplete or missing`, character);
-        return null; // You can render a placeholder or handle the missing data accordingly
+        return null; 
       }
     });
   }

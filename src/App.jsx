@@ -26,10 +26,12 @@ class App extends Component {
     };
   }
 
+  // Handler for proceeding to the main game from the intro
   startGame = (event) => {
     this.setState({ playing: true });
   };
 
+  // Load data from server on load
   async componentDidMount() {
     try {
       const storyData = await ServerInterface.getStory();
@@ -54,7 +56,7 @@ class App extends Component {
     }
   }
   
-
+  // Handle interactions with server interface
   getResponse = async (message, index) => {
     // Check if storySummary is not null before accessing its properties
     this.setState({ 
@@ -91,7 +93,7 @@ class App extends Component {
             currentResponse: response,
           });
           
-          console.log(this.state.messages[0].length);
+          // console.log(this.state.messages[0].length);
 
         } catch (error) {
           console.error('Error getting character response:', error);
@@ -105,6 +107,7 @@ class App extends Component {
     }
   };
 
+  // Handle interactions with server interface
   getVerdict = async (messages, index) => {
     // Check if storySummary is not null before accessing its properties
     this.setState({ 
@@ -145,9 +148,8 @@ class App extends Component {
   render() {
     return (
       <div className='main'>
-      <img src={backgroundimg} className='background-img' alt="Background"></img> 
-      
-        
+        <img src={backgroundimg} className='background-img' alt="Background"></img> 
+        {/* Show main game or intro */}
         {this.state.playing ? (
           <MainGame
             story={this.state.storySummary}
@@ -166,7 +168,7 @@ class App extends Component {
             image={notecardimg}
           />
         )}
-      </div>
+    </div>
     );
   }
 }

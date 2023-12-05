@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import brownBG from '../assets/brownButton.png'
 import whiteBG from '../assets/cardButton.png'
 
+
+// Some themed buttons, these are pretty jank
 class CardButton extends Component {
   constructor() {
     super();

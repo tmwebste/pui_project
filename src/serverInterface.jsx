@@ -7,12 +7,13 @@ class ServerInterface extends Component {
   constructor() {
     super();
     this.state = {
-      SERVER_IP:'https://mystery-server.fly.dev/',
+      SERVER_IP:'https://mystery-server.fly.dev/', //Server URL for deployed server
       
-      // SERVER_IP:'http://127.0.0.1:5000/'
+      // SERVER_IP:'http://127.0.0.1:5000/' //Server URL for local dev server
     }
   }
 
+  // Run on load, gets a random existing JSON story file from the server
   getStory = async () => {
     try {
       const response = await fetch(this.state.SERVER_IP);
@@ -28,8 +29,8 @@ class ServerInterface extends Component {
     }
   }
 
+  // Get a response from the server in in the context of the story and character profiles
   getCharacterResponse = async (characterProfile, message, synopsis, endpoint) => {
-    // characterProfile = JSON.stringify(characterProfile);
     try {
       // Define the request data
       const requestData = {
@@ -38,6 +39,7 @@ class ServerInterface extends Component {
         synopsis, 
       };
       console.log(requestData);
+
       // Make a POST request to the Flask server
       const response = await fetch( this.state.SERVER_IP + endpoint, {
         method: 'POST',
@@ -52,14 +54,14 @@ class ServerInterface extends Component {
         // Parse the JSON response from the server
         const characterResponse = await response.json();
         console.log(characterResponse);
-        // Do something with the characterResponse, e.g., update state or display it
+        // Return the character response
         return characterResponse;
       } else {
         // Handle server error
         console.error('Server returned an error');
       }
     } catch (error) {
-      // Handle client-side error
+      // Handle client error
       console.error('Client-side error:', error);
     }
   }

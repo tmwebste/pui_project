@@ -14,7 +14,8 @@ class MainGame extends Component {
       userMessage: '', // State to store the user's input message
       showCase: false,
       showMenu: false,
-      caseButtonLabel: {true:'Back', false:'View Case'}
+      caseButtonLabel: {true:'Back', false:'View Case'},
+      menuButtonLabel: {true:'Back', false:'MENU'}
     };
   }
 
@@ -67,58 +68,79 @@ class MainGame extends Component {
   render() {
     return (
       <div className="mainGame">
-        {/* <h1>Murder Mystery</h1> */}
+        {/* Show game if story was successfully loaded from server */}
         {this.props.story != null ? (
-          <div>
+          <section className='active-game'>
 
             <img src={this.props.bgImg} className='main-notecard' alt="Background"></img> 
 
-            {/* <p className='synopsis'>{this.props.story.synopsys}</p>
-            <p>Weapon:</p>
-            <p>{this.props.story.evidence.weapon}</p> */}
-            {/* <p>{this.props.characters.character1.background.backstory}</p> */}
-
-            {/* Replace with SideBar and nest minicards within */}
+            {/* Show lefthand bar to display character mini cards for the user to select */}
             <SideBar 
               characters = {this.props.characters}
               selectedCharacterIndex = {this.state.selectedCharacterIndex}
               selectCharacter={this.selectCharacter}
             />
 
+            {/* A button that allows the user to view the case summary */}
             <section className = 'toggle-case-view'>
               <CardButton  
                 buttonStyle = 'white'
-                label = {this.state.caseButtonLabel[this.state.showCase]}
+                label = {this.state.caseButtonLabel[this.state.showCase]} //This button changes labels based on current state
                 labelID = 'case-button-label'
                 onclick = {this.toggleCaseView}
               />
             </section>
 
+            {/* A button that will show the menu */}
             <section className = 'toggle-menu-view'>
               <CardButton  
                 buttonStyle = 'white'
-                label = 'MENU'
+                label = {this.state.menuButtonLabel[this.state.showMenu]} //This button changes labels based on current state
                 labelID = 'menu-button-label'
                 onclick = {this.toggleMenuView}
               />
             </section>
 
-            <section className='messages-card'>
-              <MiniCard
-                key={this.state.selectedCharacterIndex}
-                characterIndex={this.state.selectedCharacterIndex}
-                firstName={this.props.characters[this.state.selectedCharacterIndex].background.firstName}
-                lastName={this.props.characters[this.state.selectedCharacterIndex].background.lastName}
-                occupation={this.props.characters[this.state.selectedCharacterIndex].background.occupation.charAt(0).toUpperCase() + this.props.characters[this.state.selectedCharacterIndex].background.occupation.slice(1)}
-                selectCharacter={this.props.selectCharacter}
-                selectedCharacterIndex={this.props.selectedCharacterIndex}
+            {/* Right side area to input and display messages */}
+            <section className='message-area'>
+              {/* Show current characters mini card */}
+              <section className='messages-card'>
+                <MiniCard
+                  key={this.state.selectedCharacterIndex}
+                  characterIndex={this.state.selectedCharacterIndex}
+                  firstName={this.props.characters[this.state.selectedCharacterIndex].background.firstName}
+                  lastName={this.props.characters[this.state.selectedCharacterIndex].background.lastName}
+                  occupation={this.props.characters[this.state.selectedCharacterIndex].background.occupation.charAt(0).toUpperCase() + this.props.characters[this.state.selectedCharacterIndex].background.occupation.slice(1)}
+                  selectCharacter={this.props.selectCharacter}
+                  selectedCharacterIndex={this.props.selectedCharacterIndex}
+                />
+              </section>
+              {/* Show the messages for the selected caracter via MEssage Section Component*/}
+              <MessageSection
+                messages={this.props.messages[this.state.selectedCharacterIndex]}
+                userMessage={this.state.userMessage}
+                messageInput={this.handleInputChange}
+                messageSend={this.handleMessageSend}
+                isLoading={this.state.isLoading}
               />
-            </section>
-            <MessageSection
-              messages={this.props.messages[this.state.selectedCharacterIndex]}
-            />
+              
+              {/* Text entry and send button for user message for character */}
+              <section className='message-input'>
+                <input
+                  type="text"
+                  value={this.state.userMessage}
+                  onChange={this.handleInputChange}
+                />
 
-            {/* Add character details */}
+                <button className='messageSend'
+                  onClick={() => this.handleMessageSend()}
+                  disabled={this.state.isLoading}>
+                  Send Message
+                </button>
+              </section>
+            </section>
+
+            {/* Show the game menu */}
             { this.state.showMenu ? (
               <section className='options-menu'>
                 <h1>Menu:</h1>
@@ -132,11 +154,13 @@ class MainGame extends Component {
                 </section>
               </section>
             ):(
+              // Show the case synopsis
               this.state.showCase ? (
                 <section className="intro">
                 <p className="synopsis">{this.props.story.synopsys}</p>
                 </section>
               ):(
+                // Show the selscted characters details
                 <section className='intro'>
                   <CharacterDetails
                     character = {this.props.characters[this.state.selectedCharacterIndex]}
@@ -147,24 +171,9 @@ class MainGame extends Component {
                 )
 
             )}
-
-            {/* Replace with MessageSection and render all previous messages */}
-            <section className='message-input'>
-              <input
-                type="text"
-                value={this.state.userMessage}
-                onChange={this.handleInputChange}
-              />
-
-              <button className='messageSend'
-                onClick={() => this.handleMessageSend()}
-                disabled={this.state.isLoading}>
-                Send Message
-              </button>
-            </section>
-
-          </div>
+          </section>
         ) : (
+          // Show loading while waiting for game file from server
           <p>Loading data...</p>
         )}
       </div>

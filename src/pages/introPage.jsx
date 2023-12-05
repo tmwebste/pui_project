@@ -11,6 +11,7 @@ class IntroPage extends Component {
     }
   }
 
+  // Handle progressing through the intro
   goToStory = () => {
     this.setState({ gameIntro: false });
   };
@@ -23,7 +24,7 @@ class IntroPage extends Component {
         {this.props.story != null ? (
           this.state.gameIntro ? (
             <section className="intro">
-              {/* {this.state.instructions} */}
+              {/* Show instructions in list format */}
               <h1>Instructions:</h1>
               <ol className='instructions'>
                 <li>Understand the Premise: Get acquainted with the game's theme and storyline. You'll be stepping into the role of a detective to solve a murder mystery.</li><br></br>
@@ -40,6 +41,7 @@ class IntroPage extends Component {
           ) : (
             <section className="intro">
               <h1>Story:</h1>
+              {/* Show story summary */}
               <p className="synopsis">{this.props.story.synopsys}</p>
               <button onClick={this.props.startGame}>Start Game</button>
             </section>

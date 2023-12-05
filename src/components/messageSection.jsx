@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Message from './message';
 import sideBG from '../assets/sideBG.png'
 
 class MessageSection extends Component {
@@ -7,24 +6,25 @@ class MessageSection extends Component {
     super();
   }
 
+  // Display the messages passed to this component
   renderMessages() {
     const messagesToRender = Object.values(this.props.messages).filter(message => message && message.senderMessage);
   
     return messagesToRender.map((message, index) => {
-      const { senderMessage, characterMessage } = message; // Extracting necessary data
+      const { senderMessage, characterMessage } = message;
       
       return (
-        <div key={index}>
+        <section className='message-section'>
+          {/* Render sender and character messages differently */}
           <p>Sender: {senderMessage}</p>
           {characterMessage ? (
             <p>Character: {characterMessage}</p>
-            /* You can modify this to display specific properties of characterMessage */
           ):(
-            <p>Character: '...'</p>
+            <p>Character: ...</p>
           )}
-          {/* You can add additional components or content related to each message */}
-          {/* <Message /> */}
-        </div>
+        </section>
+
+
       );
     });
   }
