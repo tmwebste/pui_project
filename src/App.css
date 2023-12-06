@@ -34,6 +34,12 @@ body {
   height: 100%; /* Set height to 100% of the viewport height */
 }
 
+.result-popup {
+  /* position: absolute; */
+  width: 60%;
+  z-index: 2;
+}
+
 .message-area {
   position: absolute;
   left: 78%;
@@ -42,12 +48,6 @@ body {
   justify-content: center;
 }
 
-.messagesBG {
-  /* position: absolute;
-  left: 78%;
-  top: 20px; */
-  z-index: -1;
-}
 
 .messages {
   position: absolute;
@@ -246,6 +246,13 @@ body {
 .brown-card-button-label{
   position: absolute;
   left: 32%;
+  top: 35%;
+  color: black;
+}
+
+#quit-button-label{
+  position: absolute;
+  left: 42%;
   top: 35%;
   color: black;
 }

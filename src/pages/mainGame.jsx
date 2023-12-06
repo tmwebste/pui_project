@@ -6,6 +6,7 @@ import CardButton from '../components/cardButton';
 import MiniCard from '../components/miniCard';
 
 
+
 class MainGame extends Component {
   constructor() {
     super();
@@ -15,7 +16,7 @@ class MainGame extends Component {
       showCase: false,
       showMenu: false,
       caseButtonLabel: {true:'Back', false:'View Case'},
-      menuButtonLabel: {true:'Back', false:'MENU'}
+      menuButtonLabel: {true:'Back', false:'MENU'},
     };
   }
 
@@ -52,13 +53,26 @@ class MainGame extends Component {
   toggleCaseView = () => {
     this.setState({
       showCase: !this.state.showCase,
+      showMenu: false,
     })
   }
   
   toggleMenuView = () => {
     this.setState({
       showMenu: !this.state.showMenu,
+      showCase: false,
     })
+  }
+
+  getGameResult = () => {
+    let characterGuilty = (String(this.props.characters[this.state.selectedCharacterIndex].guilty) === 'true');
+    
+    if (characterGuilty){
+      return <h2>You found the culprit. Congratulations!</h2>;
+    } else {
+      return <h2>You did not find the murderer. Feel free to investigate the other characters.</h2>;
+    }
+    
   }
 
   quitGame = () => {
@@ -68,6 +82,7 @@ class MainGame extends Component {
   render() {
     return (
       <div className="mainGame">
+
         {/* Show game if story was successfully loaded from server */}
         {this.props.story != null ? (
           <section className='active-game'>
@@ -111,7 +126,7 @@ class MainGame extends Component {
                   firstName={this.props.characters[this.state.selectedCharacterIndex].background.firstName}
                   lastName={this.props.characters[this.state.selectedCharacterIndex].background.lastName}
                   occupation={this.props.characters[this.state.selectedCharacterIndex].background.occupation.charAt(0).toUpperCase() + this.props.characters[this.state.selectedCharacterIndex].background.occupation.slice(1)}
-                  selectCharacter={this.props.selectCharacter}
+                  selectCharacter={this.selectCharacter}
                   selectedCharacterIndex={this.props.selectedCharacterIndex}
                 />
               </section>
@@ -125,19 +140,24 @@ class MainGame extends Component {
               />
               
               {/* Text entry and send button for user message for character */}
-              <section className='message-input'>
-                <input
-                  type="text"
-                  value={this.state.userMessage}
-                  onChange={this.handleInputChange}
-                />
+              { !this.props.accused[this.state.selectedCharacterIndex]  ? (
+                <section className='message-input'>
+                  <input
+                    type="text"
+                    value={this.state.userMessage}
+                    onChange={this.handleInputChange}
+                  />
 
-                <button className='messageSend'
-                  onClick={() => this.handleMessageSend()}
-                  disabled={this.state.isLoading}>
-                  Send Message
-                </button>
-              </section>
+                  <button className='messageSend'
+                    onClick={() => this.handleMessageSend()}
+                    disabled={this.state.isLoading}>
+                    Send Message
+                  </button>
+                </section>
+                ):(
+                  <section className='message-input'></section>
+                )
+              }
             </section>
 
             {/* Show the game menu */}
@@ -160,15 +180,38 @@ class MainGame extends Component {
                 <p className="synopsis">{this.props.story.synopsys}</p>
                 </section>
               ):(
+
+                //* Pop up to show verdict result *
+                this.props.resultPopUp && this.props.judgeResponse[this.state.selectedCharacterIndex]?.response ? (
+                  <section className='intro'>
+                    <h1>Verdict:</h1>
+                    <h2>{this.props.judgeResponse[this.state.selectedCharacterIndex].response}</h2>
+                    <h1>Truth:</h1>
+                    {this.getGameResult()}
+
+                    <section className='quit-button'>
+                      <CardButton
+                        buttonStyle = 'brown'
+                        label = 'Quit Game'
+                        labelID = 'quit-button-label'
+                        onclick = {this.quitGame}
+                      />
+                    </section>
+                  </section>
+                ):(
+
+
                 // Show the selscted characters details
-                <section className='intro'>
-                  <CharacterDetails
-                    character = {this.props.characters[this.state.selectedCharacterIndex]}
-                    accuseFunction = {this.handleVerdictMessageSend}
-                    messages = {this.props.messages[this.state.selectedCharacterIndex]}
-                  />
-                </section>
+                  <section className='intro'>
+                    <CharacterDetails
+                      character = {this.props.characters[this.state.selectedCharacterIndex]}
+                      accuseFunction = {this.handleVerdictMessageSend}
+                      messages = {this.props.messages[this.state.selectedCharacterIndex]}
+                      accused = {this.props.accused[this.state.selectedCharacterIndex]}
+                    />
+                  </section>
                 )
+              )
 
             )}
           </section>

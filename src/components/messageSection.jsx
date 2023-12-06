@@ -14,8 +14,9 @@ class MessageSection extends Component {
       const { senderMessage, characterMessage } = message;
       
       return (
-        <section className='message-section'>
+        <section className='message-section' key={index}>
           {/* Render sender and character messages differently */}
+          
           <p>Sender: {senderMessage}</p>
           {characterMessage ? (
             <p>Character: {characterMessage}</p>

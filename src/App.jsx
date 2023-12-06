@@ -20,15 +20,23 @@ class App extends Component {
       characters: null,
       charactersArray: null,
       currentResponse: null,
-      judgeResponse: null,
+      judgeResponse: [null,null,null,null],
       messages: [[],[],[],[]],
+      accused: [false, false, false, false],
       playing: false,
+      resultPopUp: false,
     };
   }
 
   // Handler for proceeding to the main game from the intro
   startGame = (event) => {
     this.setState({ playing: true });
+  };
+
+  togglePopUp = () => {
+    this.setState((prevState) => ({
+      resultPopUp: !prevState.resultPopUp,
+    }));
   };
 
   // Load data from server on load
@@ -110,28 +118,34 @@ class App extends Component {
   // Handle interactions with server interface
   getVerdict = async (messages, index) => {
     // Check if storySummary is not null before accessing its properties
-    this.setState({ 
-      judgeResponse: null,
-    });
 
     console.log("Character Index: ", index);
     if (this.state.storySummary) {
       if (messages.length > 0){
         try {
-          // Assuming ServerInterface.getCharacterResponse returns a Promise
           let response = await ServerInterface.getCharacterResponse(
             this.state.charactersArray[index],
             messages,
             this.state.storySummary,
             'get_verdict'
           );
-         
-          this.setState({
-            judgeResponse: response,
-          });
           
-          console.log(this.state.judgeResponse);
+          let updatedAccusedList = this.state.accused;
+          updatedAccusedList[index] = true;
 
+          let updatedJudgeResponse = this.state.judgeResponse;
+          updatedJudgeResponse[index] = response;
+          updatedJudgeResponse[index].responseSentament = (String(updatedJudgeResponse[index].responseSentament).toLowerCase() === 'true');
+
+
+          this.setState({
+            judgeResponse: updatedJudgeResponse,
+            accused: updatedAccusedList,
+            resultPopUp: true
+          });
+
+          console.log(this.state.resultPopUp);
+          
         } catch (error) {
           console.error('Error getting judge response:', error);
         }
@@ -149,6 +163,7 @@ class App extends Component {
     return (
       <div className='main'>
         <img src={backgroundimg} className='background-img' alt="Background"></img> 
+
         {/* Show main game or intro */}
         {this.state.playing ? (
           <MainGame
@@ -160,6 +175,8 @@ class App extends Component {
             judgeResponse={this.state.judgeResponse}
             bgImg={notecardimg}
             messages={this.state.messages}
+            accused={this.state.accused}
+            resultPopUp={this.state.resultPopUp}
           />
         ) : (
           <IntroPage
