@@ -16,6 +16,14 @@ body {
   color: black;
 }
 
+strong {
+  font-size: 50;
+}
+
+li {
+  list-style-type: none;
+}
+
 .intro {
   position: absolute;
   top: 25%;
@@ -284,10 +292,3 @@ body {
   font-size: 22px; 
 }
 
-/* .intro::-webkit-scrollbar {
-  display: none;
-}
-
-.intro::-webkit-scrollbar:hover {
-  display: flex;
-} */
